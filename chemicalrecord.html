@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chemical Record JSON Generator</title>
+    <script src="chemicalrecord.js"></script>
+    <link href="chemicalrecord.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <div class="header">
+        <h1>Chemical Record JSON Generator</h1>
+      </div>
+
+      <div class="namescontainer">
+        <h2>Add Chemical Names:</h2>
+        <form
+          action=""
+          id="mainform"
+          method="get"
+          name="mainform"
+          onsubmit="generateChemicalJSON(); return false"
+        >
+          <div id="names">
+            <div class="nameDiv">
+              <input type="text" placeholder="Chemical Name" required />
+              <button type="button" id="initialname" disabled>Delete</button>
+            </div>
+          </div>
+          <button type="button" onclick="createNameField()" id="add">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <div id="puresubstance">
+            <div id="checkboxcontainer">
+              <input
+                type="checkbox"
+                onchange="handleCheckbox()"
+                id="puresubstanceinput"
+                name="puresubstanceinput"
+              />
+              <label for="puresubstanceinput">Pure Substance</label>
+            </div>
+            <div id="hiddenfields">
+              <div id="InChIKey">
+                <p>InChIKey:</p>
+                <input type="text" placeholder="InChIKey" id="InChIKeyinput" />
+              </div>
+              <div id="InChI">
+                <p>InChI:</p>
+                <input type="text" placeholder="InChI" id="InChIinput" />
+              </div>
+              <div id="SMILES">
+                <p>SMILES:</p>
+                <input type="text" placeholder="SMILES" id="SMILESinput" />
+              </div>
+              <div id="PubchemCID">
+                <p>PubchemCID:</p>
+                <input
+                  type="text"
+                  placeholder="PubchemCID"
+                  id="PubchemCIDinput"
+                />
+              </div>
+            </div>
+          </div>
+          <div id="CAS">
+            <p>CAS:</p>
+            <input type="text" placeholder="CAS" id="CASinput" required />
+          </div>
+          <div id="wikidata">
+            <p>Wikidata:</p>
+            <input
+              type="text"
+              placeholder="Enter Wikidata URL"
+              id="wikidatainput"
+              required
+            />
+          </div>
+          <input type="submit" id="generate" value="Generate and View Data" />
+        </form>
+
+        <div id="infoModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modalDetails">
+            <div id="chemicalRecordOutput">
+              <h3 id="outputHeader"></h3>
+              
+                <pre id="JSONChemicalRecord">
+                
+                </pre>
+                <p id="error">
+      
+                </p>
+                <button type="button" id="copy" onclick="copyJSON()">Copy JSON <i class="fa-solid fa-copy"></i></button>
+            </div>
+            <div id="moleculecontainer">
+              <h3 id="moleculeHeader">Molecule Display:</h3>
+              <img id="moleculeDisplay" data-smiles-options="{ 'width': 200, 'height': 200 }"/>
+            </div>
+          </div>
+          </div>
+        </div>
+        <!--
+        <div id="chemicalRecordOutput">
+          <h3 id="outputHeader"></h3>
+          
+            <pre id="JSONChemicalRecord">
+            
+            </pre>
+            <p id="error">
+  
+            </p>
+            <button type="button" id="copy" onclick="copyJSON()">Copy JSON <i class="fa-solid fa-copy"></i></button>
+        </div>
+        <div id="moleculecontainer">
+          <h3 id="moleculeHeader">Molecule Display:</h3>
+          <img id="moleculeDisplay" data-smiles-options="{ 'width': 200, 'height': 200 }"/>
+        </div>-->
+      </div>
+      <div id="snackbar">JSON Copied</div>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/smiles-drawer@2.0.1/dist/smiles-drawer.min.js"
+    ></script>
+  </body>
+</html>
