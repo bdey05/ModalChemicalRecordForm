@@ -71,7 +71,7 @@ let generateChemicalJSON = () => {
 
   const wikidata = document.getElementById("wikidatainput").value;
   if (!wikidataValidator(wikidata)) {
-    return displayError("Invalid Wikidata URL");
+    return displayError("Invalid URL");
   }
 
   if (document.getElementById("puresubstanceinput").checked) {
@@ -99,7 +99,7 @@ let generateChemicalJSON = () => {
       InChI: InChI,
       SMILES: SMILES,
       PubchemCID: PubchemCID,
-      wikidata: wikidata,
+      URL: wikidata,
     };
 
     /*document.getElementById("moleculeDisplay").style.display = "block";
@@ -120,7 +120,7 @@ let generateChemicalJSON = () => {
       names: chemicalNames,
       "pure substance": false,
       CAS: CAS,
-      wikidata: wikidata,
+      URL: wikidata,
     };
   }
   let modal = document.getElementById("infoModal");
@@ -191,10 +191,11 @@ let CASValidator = (CAS) => {
 let wikidataValidator = (wikidata) => {
   try {
     new URL(wikidata.trim());
+    return true;
   } catch (e) {
     return false;
   }
-  return wikidata.trim().startsWith("https://www.wikidata.org/wiki/Q");
+  //return wikidata.trim().startsWith("https://www.wikidata.org/wiki/Q");
 };
 
 let displayError = (error) => {
